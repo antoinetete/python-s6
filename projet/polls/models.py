@@ -1,4 +1,5 @@
 import datetime
+import json
 from time import time
 
 from django.db import models
@@ -22,3 +23,8 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+
+class Graph(models.Model):
+    x_axis = models.TextField()
+    y_axis = models.TextField()
