@@ -9,12 +9,19 @@ import io, base64
 from django.db.models.functions import TruncDay
 from matplotlib.ticker import LinearLocator
 
+
+import pandas as pd
+
 import numpy as np
 
 from .models import Question
 
 
 def index(request):
+
+    df = pd.read_table('https://www.data.gouv.fr/fr/datasets/r/817204ac-2202-4b4a-98e7-4184d154d98c', delimiter = '|')
+    df = df.dropna(axis = 1, how = "all")
+    df["Valeur fonciere"] = df["Valeur fonciere"].str.replace(',', '.').astype('float')
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
