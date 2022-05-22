@@ -26,7 +26,7 @@ def index(request):
     df = df[df['Valeur fonciere'] <= 5000000]
     df['Surface Carrez du 1er lot'] = df['Surface Carrez du 1er lot'].fillna(0)
     df['Surface Carrez du 1er lot'] = df['Surface Carrez du 1er lot'].apply(lambda x : str(x).replace(',','.')).astype(float)
-    context = get_graph(1, 1, df)
+    context = get_graph(df)
     return render(request, 'polls/test.html', context)
 
 
@@ -51,7 +51,7 @@ def test(request):
     context = get_map()
     return render(request, 'polls/test.html', context)
 
-def get_graph(x, y, df):
+def get_graph(df):
     df2 = df.groupby('Date mutation')['Valeur fonciere'].sum().reset_index()
     fig, ax = plt.subplots(figsize=(10,4))
     ax.plot(df2['Date mutation'], df2["Valeur fonciere"])
