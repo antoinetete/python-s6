@@ -25,6 +25,11 @@ class Choice(models.Model):
         return self.choice_text
 
 
-class Graph(models.Model):
-    x_axis = models.TextField()
-    y_axis = models.TextField()
+class Map(models.Model):
+    field_name = models.CharField(max_length=200)
+    field_rename = models.CharField(max_length=200)
+    map_name = models.CharField(max_length=200)
+    id = models.AutoField(primary_key=True)
+
+    def __str__(self):
+        return self.map_name

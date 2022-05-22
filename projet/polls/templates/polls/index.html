@@ -1,7 +1,7 @@
-{% if latest_question_list %}
+{% if map_list %}
     <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% for map in map_list %}
+        <li><a href="{% url 'polls:detail' map.id %}">{{ map.map_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
